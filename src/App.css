@@ -1,0 +1,19 @@
+.App {
+  text-align: center;
+  display: flex;
+}
+
+.allMenuContainer {
+  width: 35%;
+  background: #CFCFCF;
+}
+
+.allTodoContainer {
+  padding: 15px 60px;
+  width: 65%;
+  height: 100%;
+  background: #6B7984;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
