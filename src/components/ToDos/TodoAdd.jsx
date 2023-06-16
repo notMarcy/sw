@@ -15,7 +15,7 @@ function TodoAdd({ addTodo }) {
       <form onSubmit={onSubmitHandler}>
         <input
           type="text"
-          placeholder="enter new todo"
+          placeholder="добавить задачу"
           value={text}
           onChange={(e) => { setText(e.target.value) }}
         />

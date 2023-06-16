@@ -14,14 +14,19 @@
   display: flex;
   align-items: center;
   margin: 0 0 20px 0;
+  font-weight: bold;
 }
 
-.infinityLogo {
+.infinity {
+  margin-right: 10px;
+}
+
+/* .infinityLogo {
   background: url('../../../public/img/infinity.svg') no-repeat;
-  background-position: center 12px;
+  background-position: center;
   background-size: contain;
   width: 35px;
   height: 35px;
   filter: invert(100%);
   margin-right: 12px;
-}
+} */

@@ -4,10 +4,21 @@
   background: #EFEFF0;
   /* text-align: center; */
   border-radius: 4px;
-  padding: 12px 9px;
+  padding: 10px 9px;
   width: 100%;
   display: flex;
   align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  transition: 0.25s;
+}
+
+.leftSide {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-right: 10px;
+  height: 25px;
 }
 
 .todoContainer:last-child {
@@ -15,35 +26,73 @@
 }
 
 .todoContainer .check {
-  width: 18px;
-  height: 18px;
-  border: 1.5px solid #5F5F5F;
+  width: 25px;
+  height: 25px;
+  font-size: 20px;
+  border: 2.5px solid #5F5F5F;
   margin-right: 5px;
-  border-radius: 50%;
+  border-radius: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: background 0.25s;
 }
 
-.todoContainer span {
-  color: green;
-  -webkit-user-select: none;
-  /* Safari */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* Internet Explorer/Edge */
-  user-select: none;
-  /* Общий вариант */
+.todoContainer input {
+  box-sizing: content-box;
+  padding: 0 5px;
+  display: block;
+  margin: 0;
+  flex: 1;
+  width: 100%;
+  outline: none;
+  background: #6B7984;
+  color: #EFF0F0;
+  font-size: 20px;
 }
 
 .todoContainer p {
-  display: flex;
-  align-items: center;
   color: #262626;
+  font-size: 20px;
+  line-height: 20px;
 }
 
 .done {
-  background: greenyellow;
+  background: #bbbbbc;
+}
+
+.todoContainer.done .check {
+  background: #5F5F5F;
+  color: #fff;
+}
+
+.rightSide {
+  display: flex;
+}
+
+.edit {
+  width: 25px;
+  height: 25px;
+  color: #0a3d52;
+  font-size: 25px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.save {
+  width: 25px;
+  height: 25px;
+  color: #0a3d52;
+  font-size: 25px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.delete {
+  width: 25px;
+  height: 25px;
+  color: #DA532C;
+  font-size: 25px;
+  cursor: pointer;
 }

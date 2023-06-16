@@ -6,10 +6,12 @@ import './App.css';
 function App() {
 
   const [todos, setTodos] = useState([
-    { text: 'fads1', done: false },
-    { text: 'fads2', done: false },
-    { text: 'fads3', done: false }
+    { text: 'Погулять с собакой', done: false },
+    { text: 'Вынести мусор', done: false },
+    { text: 'Прочитать 100 страниц', done: false }
   ])
+
+
 
   const addTodoHandler = (text) => {
     setTodos([...todos, { text, done: false }])
@@ -23,14 +25,37 @@ function App() {
     })
   }
 
+  const deleteTask = (index) => {
+    setTodos(prevTodos => {
+      const updatedTodos = [...prevTodos]
+      updatedTodos.splice(index, 1)
+      return updatedTodos
+    })
+  }
+
+  const editTask = ((index, newText) => {
+    setTodos(prevTodos => {
+      const updatedTodos = [...prevTodos]
+      updatedTodos[index].text = newText
+      return updatedTodos
+    })
+  })
+
   return (
     <div className="App">
       <div className="allMenuContainer">
 
       </div>
       <div className="allTodoContainer">
-        <TodoList todos={todos} toggleDone={toggleDone} />
-        <TodoAdd addTodo={addTodoHandler} />
+        <TodoList
+          todos={todos}
+          toggleDone={toggleDone}
+          deleteTask={deleteTask}
+          editTask={editTask}
+        />
+        <TodoAdd
+          addTodo={addTodoHandler}
+        />
       </div>
     </div>
   )
