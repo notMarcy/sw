@@ -1,29 +1,48 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfinity } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 
-import Todo from './Todo'
-import styles from './TodoList.module.css'
+import Todo from './Todo';
+import styles from './TodoList.module.css';
 
 function TodoList({ todos, toggleDone, deleteTask, editTask }) {
+  const completedTodos = todos.filter((todo) => todo.done);
+  const activeTodos = todos.filter((todo) => !todo.done);
+
   return (
     <div className={styles.allTodoContainer}>
-      <h2><FontAwesomeIcon className={styles.infinity} icon={faInfinity} /> ВСЕ ЗАДАЧИ</h2>
       <ul className={styles.todoListContainer}>
-
-        {!todos.length && <h2>задач нет!</h2>}
-        {todos.map((todo, index) => (
+        {!activeTodos.length && <h2>задач нет!</h2>}
+        {activeTodos.map((todo) => (
           <Todo
-            key={index}
+            key={todo.id}
             todo={todo}
-            targetIndex={index}
+            target={todo.id}
             toggleDone={toggleDone}
             deleteTask={deleteTask}
             editTask={editTask}
           />
         ))}
+        {completedTodos.length > 0 && (
+          <div className={styles.completed}>
+            <h2>
+              <FontAwesomeIcon className="infinity" icon={faCircleCheck} />
+              ВЫПОЛНЕННЫЕ
+            </h2>
+            {completedTodos.map((todo) => (
+              <Todo
+                key={todo.id}
+                todo={todo}
+                target={todo.id}
+                toggleDone={toggleDone}
+                deleteTask={deleteTask}
+                editTask={editTask}
+              />
+            ))}
+          </div>
+        )}
       </ul>
     </div>
-  )
+  );
 }
 
-export default TodoList
+export default TodoList;

@@ -3,17 +3,54 @@
   display: flex;
 }
 
+.TodoList {
+  flex: 1 1;
+  height: 100%;
+}
+
 .allMenuContainer {
   width: 35%;
   background: #CFCFCF;
 }
 
 .allTodoContainer {
-  padding: 15px 60px;
+  padding: 15px 55px 15px 60px;
   width: 65%;
   height: 100%;
   background: #6B7984;
   display: flex;
   flex-direction: column;
+  text-align: left;
+  /* justify-content: space-between; */
+}
+
+.headerTodos {
+  display: flex;
   justify-content: space-between;
+  margin-right: 25px;
+  align-items: flex-start;
+}
+
+.sort {
+  color: #fff;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.allTodoContainer h2 {
+  text-align: left;
+  color: #fff;
+  font-size: 32px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  margin: 0 0 20px 0;
+  font-weight: bold;
+}
+
+.infinity {
+  margin-right: 10px;
 }

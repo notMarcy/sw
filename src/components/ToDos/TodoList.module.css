@@ -3,30 +3,41 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: 5px;
 }
 
+.allTodoContainer {
+  flex: 1 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
 
-.allTodoContainer h2 {
+.allTodoContainer {
+  overflow-y: scroll;
+  /* scrollbar-width: thin; */
+  scrollbar-color: #000000 #dddddd;
+  /* Цвет полосы и цвет фона */
+}
+
+.allTodoContainer::-webkit-scrollbar {
+  width: 8px;
+  /* Ширина полосы прокрутки */
+}
+
+.allTodoContainer::-webkit-scrollbar-track {
+  background-color: #ffffff00;
+  /* Цвет фона полосы */
+}
+
+.allTodoContainer::-webkit-scrollbar-thumb {
+  background-color: #0A3D52;
+  /* Цвет полосы прокрутки */
+  border-radius: 2.5px;
+  /* Скругление углов полосы */
+}
+
+.todoListContainer .completed {
+  width: 100%;
+  margin-top: 30px;
   text-align: left;
-  color: #fff;
-  font-size: 32px;
-  font-weight: 400;
-  display: flex;
-  align-items: center;
-  margin: 0 0 20px 0;
-  font-weight: bold;
 }
-
-.infinity {
-  margin-right: 10px;
-}
-
-/* .infinityLogo {
-  background: url('../../../public/img/infinity.svg') no-repeat;
-  background-position: center;
-  background-size: contain;
-  width: 35px;
-  height: 35px;
-  filter: invert(100%);
-  margin-right: 12px;
-} */

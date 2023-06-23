@@ -1,14 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
-import { useState, useEffect, useRef } from 'react';
+import { faTrash, faCheck, faPenToSquare, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { useState, useRef } from 'react';
 import styles from './Todo.module.css';
 
 function Todo({
   todo,
-  targetIndex,
   toggleDone,
   deleteTask,
   editTask
@@ -17,21 +13,27 @@ function Todo({
   const [editedText, setEditedText] = useState(todo.text);
   const inputRef = useRef(null);
 
-  useEffect(() => {
-    if (editing) {
-      inputRef.current.focus();
-    }
-  }, [editing]);
-
   const toggleEditing = () => {
-    if (editing) saveChanges();
-    else setEditing(true);
+    setEditing((prevEditing) => !prevEditing);
+    setEditedText(todo.text);
+
+    if (!editing) {
+      setTimeout(() => {
+        const input = inputRef.current;
+        input.focus();
+        input.selectionStart = input.value.length;
+        input.selectionEnd = input.value.length;
+      }, 0);
+    }
   };
 
   const saveChanges = () => {
-    setEditing(false);
-    if (editedText.trim() !== '') editTask(targetIndex, editedText);
-    else setEditedText(todo.text);
+    if (editing && editedText.trim() !== '') {
+      editTask(todo.id, editedText);
+    }
+    setTimeout(() => {
+      setEditing(false);
+    }, 100)
   };
 
   const handleInputChange = (e) => {
@@ -39,15 +41,13 @@ function Todo({
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') saveChanges();
+    if (e.key === 'Enter') {
+      saveChanges();
+    }
   };
 
   const handleBlur = () => {
-    if (editing) {
-      setTimeout(() => {
-        saveChanges();
-      }, 100);
-    }
+    saveChanges();
   };
 
   return (
@@ -56,7 +56,7 @@ function Todo({
         <div
           className={styles.check}
           onClick={() => {
-            toggleDone(targetIndex);
+            toggleDone(todo.id);
           }}
         >
           {todo.done && <FontAwesomeIcon icon={faCheck} />}
@@ -71,7 +71,10 @@ function Todo({
             onBlur={handleBlur}
           />
         ) : (
-          <p>{todo.text}</p>
+          <div className={styles.textAndDate}>
+            <p className={styles.text}>{todo.text}</p>
+            <p className={styles.date}>{todo.date}</p>
+          </div>
         )}
       </div>
       <div className={styles.rightSide}>
@@ -89,12 +92,13 @@ function Todo({
         <div
           className={styles.delete}
           onClick={() => {
-            deleteTask(targetIndex);
+            deleteTask(todo.id);
           }}
         >
           <FontAwesomeIcon icon={faTrash} />
         </div>
       </div>
+
     </li>
   );
 }

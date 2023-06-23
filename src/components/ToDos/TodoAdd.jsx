@@ -5,9 +5,14 @@ function TodoAdd({ addTodo }) {
   const [text, setText] = useState('')
 
   const onSubmitHandler = (event) => {
-    event.preventDefault()
-    addTodo(text)
-    setText('')
+    if (text) {
+      event.preventDefault()
+      addTodo(text)
+      setText('')
+    }
+    else {
+      event.preventDefault()
+    }
   }
 
   return (

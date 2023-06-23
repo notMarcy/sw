@@ -4,10 +4,11 @@
   background: #EFEFF0;
   /* text-align: center; */
   border-radius: 4px;
-  padding: 10px 9px;
+  padding: 7.5px 9px 0px 9px;
+  min-height: 55px;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: row;
   justify-content: space-between;
   transition: 0.25s;
@@ -15,10 +16,10 @@
 
 .leftSide {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   margin-right: 10px;
-  height: 25px;
+  /* height: 25px; */
 }
 
 .todoContainer:last-child {
@@ -26,9 +27,9 @@
 }
 
 .todoContainer .check {
-  width: 25px;
-  height: 25px;
-  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
   border: 2.5px solid #5F5F5F;
   margin-right: 5px;
   border-radius: 3px;
@@ -37,6 +38,7 @@
   align-items: center;
   cursor: pointer;
   transition: background 0.25s;
+  flex-shrink: 0;
 }
 
 .todoContainer input {
@@ -58,6 +60,21 @@
   line-height: 20px;
 }
 
+.textAndDate {
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  margin-bottom: 5px;
+}
+
+.date {
+  font-size: 16px !important;
+  color: rgb(150, 150, 150) !important;
+  font-style: italic !important;
+}
+
 .done {
   background: #bbbbbc;
 }
@@ -65,6 +82,7 @@
 .todoContainer.done .check {
   background: #5F5F5F;
   color: #fff;
+  align-self: flex-start !important;
 }
 
 .rightSide {
@@ -72,27 +90,27 @@
 }
 
 .edit {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   color: #0a3d52;
-  font-size: 25px;
+  font-size: 20px;
   margin-right: 5px;
   cursor: pointer;
 }
 
 .save {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   color: #0a3d52;
-  font-size: 25px;
+  font-size: 20px;
   margin-right: 5px;
   cursor: pointer;
 }
 
 .delete {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   color: #DA532C;
-  font-size: 25px;
+  font-size: 20px;
   cursor: pointer;
 }
