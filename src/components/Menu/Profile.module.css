@@ -1,0 +1,38 @@
+.profileContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* аватар-картинка */
+.avatarImg {}
+
+/* аватар-инициалы */
+.avatarInitials {
+  width: 58px;
+  height: 58px;
+  background: #DA532C;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #EFEFF0;
+  font-size: 27px;
+  margin-right: 15px;
+}
+
+.textInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.nickname {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.email {
+  color: #575857;
+}

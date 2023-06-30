@@ -51,6 +51,12 @@
   font-weight: bold;
 }
 
-.infinity {
+.logoIcon {
   margin-right: 10px;
+}
+
+.allMenuContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
 }

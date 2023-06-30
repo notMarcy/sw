@@ -4,7 +4,7 @@ import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import Todo from './Todo';
 import styles from './TodoList.module.css';
 
-function TodoList({ todos, toggleDone, deleteTask, editTask }) {
+function TodoList({ todos, toggleDone, addToFav, deleteTask, editTask }) {
   const completedTodos = todos.filter((todo) => todo.done);
   const activeTodos = todos.filter((todo) => !todo.done);
 
@@ -18,6 +18,7 @@ function TodoList({ todos, toggleDone, deleteTask, editTask }) {
             todo={todo}
             target={todo.id}
             toggleDone={toggleDone}
+            addToFav={addToFav}
             deleteTask={deleteTask}
             editTask={editTask}
           />
@@ -34,6 +35,7 @@ function TodoList({ todos, toggleDone, deleteTask, editTask }) {
                 todo={todo}
                 target={todo.id}
                 toggleDone={toggleDone}
+                addToFav={addToFav}
                 deleteTask={deleteTask}
                 editTask={editTask}
               />

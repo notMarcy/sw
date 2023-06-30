@@ -21,15 +21,15 @@ const sortByDate = (todos) => {
     const dateB = parseCustomDate(b.date);
 
     if (dateA.month !== dateB.month) {
-      return dateA.month - dateB.month;
+      return dateB.month - dateA.month;
     }
     if (dateA.day !== dateB.day) {
-      return dateA.day - dateB.day;
+      return dateB.day - dateA.day;
     }
     if (dateA.hours !== dateB.hours) {
-      return dateA.hours - dateB.hours;
+      return dateB.hours - dateA.hours;
     }
-    return dateA.minutes - dateB.minutes;
+    return dateB.minutes - dateA.minutes;
   });
   return sortedTodos
 };

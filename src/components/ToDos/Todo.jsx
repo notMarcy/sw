@@ -1,17 +1,30 @@
+import { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faCheck, faPenToSquare, faDownload } from '@fortawesome/free-solid-svg-icons';
-import { useState, useRef } from 'react';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faTrashCan, faShareFromSquare } from '@fortawesome/free-regular-svg-icons';
+import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import styles from './Todo.module.css';
 
-function Todo({
-  todo,
-  toggleDone,
-  deleteTask,
-  editTask
-}) {
+function Todo({ todo, toggleDone, addToFav, deleteTask, editTask }) {
   const [editing, setEditing] = useState(false);
   const [editedText, setEditedText] = useState(todo.text);
+  const [isDeleting, setIsDeleting] = useState(false);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (isDeleting) {
+      // Задержка перед удалением задачи
+      const deleteTimeout = setTimeout(() => {
+        deleteTask(todo.id);
+      }, 350);
+
+      // Очистка таймера при размонтировании компонента или при изменении состояния
+      return () => {
+        clearTimeout(deleteTimeout);
+      };
+    }
+  }, [isDeleting, deleteTask, todo.id]);
 
   const toggleEditing = () => {
     setEditing((prevEditing) => !prevEditing);
@@ -31,9 +44,7 @@ function Todo({
     if (editing && editedText.trim() !== '') {
       editTask(todo.id, editedText);
     }
-    setTimeout(() => {
-      setEditing(false);
-    }, 100)
+    setEditing(false);
   };
 
   const handleInputChange = (e) => {
@@ -50,8 +61,15 @@ function Todo({
     saveChanges();
   };
 
+  const handleDelete = () => {
+    setIsDeleting(true);
+  };
+
   return (
-    <li className={`${styles.todoContainer} ${todo.done ? styles.done : ''}`}>
+    <li
+      className={`${styles.todoContainer} ${todo.done ? styles.done : ''} ${todo.isNew ? styles.adding : ''
+        } ${isDeleting ? styles.deleting : ''}`}
+    >
       <div className={styles.leftSide}>
         <div
           className={styles.check}
@@ -78,10 +96,18 @@ function Todo({
         )}
       </div>
       <div className={styles.rightSide}>
+        {/* в избранное */}
+        <div className={styles.favorites} onClick={() => addToFav(todo.id)}>
+          {!todo.favorite ? (
+            <FontAwesomeIcon icon={faStarRegular} />
+          ) : (
+            <FontAwesomeIcon icon={faStarSolid} />
+          )}
+        </div>
         {/* редактировать */}
         {editing ? (
           <div className={styles.save} onClick={saveChanges}>
-            <FontAwesomeIcon icon={faDownload} shake />
+            <FontAwesomeIcon icon={faShareFromSquare} fade />
           </div>
         ) : (
           <div className={styles.edit} onClick={toggleEditing}>
@@ -89,16 +115,10 @@ function Todo({
           </div>
         )}
         {/* удалить */}
-        <div
-          className={styles.delete}
-          onClick={() => {
-            deleteTask(todo.id);
-          }}
-        >
-          <FontAwesomeIcon icon={faTrash} />
+        <div className={styles.delete} onClick={handleDelete}>
+          <FontAwesomeIcon icon={faTrashCan} />
         </div>
       </div>
-
     </li>
   );
 }

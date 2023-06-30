@@ -1,0 +1,32 @@
+hr {
+  margin-bottom: 15px;
+}
+
+.category {
+  width: 100%;
+  font-size: 22px;
+  display: flex;
+  background: #c6c6c6;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  align-items: center;
+  padding: 5px 13px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.icon {
+  color: #0a3d52;
+  display: flex;
+  font-size: 22px;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  margin-right: 12px;
+}
+
+.active {
+  box-sizing: border-box;
+  border-right: 6px solid #0a3d52;
+}
