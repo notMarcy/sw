@@ -30,7 +30,8 @@ function AllCategories({ handleCategoryChange, activeCategory }) {
         <span className={styles.text}>Избранные</span>
       </div>
       {/* статистика */}
-      <div className={`${styles.category} ${styles.catStat}`}
+      <div className={`${styles.category} ${styles.catStat} ${activeCategory === 'statistics' ? styles.active : ''}`}
+        onClick={() => { handleCategoryChange('statistics') }}
       >
         <span className={styles.icon}><FontAwesomeIcon icon={faTable} /></span>
         <span className={styles.text}>Статистика</span>

@@ -1,0 +1,27 @@
+.stat{
+    height: 100%;
+    width: 100%;
+  }
+  .completedTodos{
+    min-height: 60px;
+    margin-bottom: 3px;
+    background: #EFEFF0;
+    /* text-align: center; */
+    border-radius: 4px;
+    padding: 0px 9px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 22px;
+  }
+  .countCompletedTasks{
+    display: flex;
+    width: 40px;
+    height: 100%;
+    border-left: 2px solid black;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }

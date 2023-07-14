@@ -1,0 +1,33 @@
+.regform{
+    width: 50%;
+    height: 60%;
+    margin: 150px auto;
+    background-color: rgb(133, 141, 171);
+    background-image: url('img/design.png');
+    background-size: cover;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 20px;
+    border: 2px solid rgb(255, 255, 255);
+}
+h3{
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 1px black;
+}
+.form{
+    padding: 40px 10px;
+}
+label{
+    display: block;
+    margin-bottom: 30px;
+}
+.but{
+    cursor: pointer;
+}
+.but:hover{
+    background-color: rgb(203, 203, 203);
+}

@@ -1,5 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { faInfinity, faArrowDownWideShort, faSun, faStar, faTable } from '@fortawesome/free-solid-svg-icons';
+import {faCircleUp} from '@fortawesome/free-regular-svg-icons';
 import { v4 as uuidv4 } from 'uuid';
 import React, { useState } from 'react';
 import sortByDate from './utils/sortByDate';
@@ -9,6 +11,8 @@ import AllCategories from './components/Menu/AllCategories';
 import TodoList from './components/ToDos/TodoList';
 import TodoAdd from './components/ToDos/TodoAdd';
 import './App.css';
+import RegForm from './reg-aut-form/Reg';
+import AutForm from './reg-aut-form/Aut';
 
 function App() {
 
@@ -16,7 +20,7 @@ function App() {
   const [nickname, setNickname] = useState('Иван Петров')
   const [email, setEmail] = useState('petrov@gmail.com')
   const [avatar, setAvatar] = useState(false)
-
+  const [authorised, setAuthorised] = useState(false);
   // Формат даты
   function formatDateTime(date) {
     const monthNames = [
@@ -41,6 +45,8 @@ function App() {
 
   // Поиск 
   const [searchTerm, setSearchTerm] = useState('')
+  var allDone = [];
+  allDone = todos.filter(() => todos.done);
 
   const handleSearch = (event) => {
     handleCategoryChange('all')
@@ -57,7 +63,6 @@ function App() {
   const [categoryName, setCategoryName] = useState('ВСЕ ЗАДАЧИ')
   const [categoryIcon, setCategoryIcon] = useState(<FontAwesomeIcon className="logoIcon" icon={faInfinity} />)
   const [selectedCategory, setSelectedCategory] = useState('all');
-
   // Изменение заголовка и иконки
   const handleCategoryChange = (category, activeCategory) => {
     setSelectedCategory(category);
@@ -72,6 +77,10 @@ function App() {
     else if (category === 'favorites') {
       setCategoryName('ИЗБРАННЫЕ')
       setCategoryIcon(<FontAwesomeIcon className="logoIcon" icon={faStar} />)
+    }
+    else if (category === 'statistics') {
+      setCategoryName('СТАТИСТИКА')
+      setCategoryIcon(<FontAwesomeIcon className="logoIcon" icon={faTable} />)
     }
   };
 
@@ -92,6 +101,9 @@ function App() {
     }
     else if (selectedCategory === 'favorites') {
       return todos.filter((todo) => todo.favorite)
+    }
+    else if (selectedCategory === 'statistics'){
+      return todos.filter((todo) => todo.done);
     }
   };
 
@@ -132,11 +144,20 @@ function App() {
 
   // Выполнение задачи
   const toggleDone = (id) => {
+    //  newDone = {};
     setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, done: !todo.done } : todo
-      )
+      prevTodos.map((todo) =>{
+        // const newDone = todo.id === id ?  todo : {};
+        return todo.id === id ? { ...todo, done: !todo.done } : todo
+  })
     );
+    // if (newDone !== {}) {
+    //   if (newDone.done && allDone.indexOf(newDone)<0) allDone.push(newDone)
+    //   else if ( newDone !== {} && !newDone.done && allDone.indexOf(newDone)>=0) allDone.splice(allDone.indexOf(newDone),1) 
+    //   console.log(newDone)
+    //   console.log(allDone)
+    // }
+   
   };
 
   // Добавление в избранные
@@ -174,14 +195,42 @@ function App() {
     setTodos(sortByDate(todos))
   }
 
+  // Регистрация
+  const [regOn, setRegOn] = useState(false);
+
+  //Авторизация
+  const [autOn, setAutOn] = useState(false);
+
+
   return (
     <div className="App">
       <div className="allMenuContainer">
-        <Profile
+        { authorised && < Profile
           avatar={avatar}
           nickname={nickname}
           email={email}
-        />
+        />}
+        { !authorised && 
+        <div className='butcont'>
+        <div
+          className='regbut'
+          onClick={()=>{
+            setAutOn(false);
+            setRegOn(true)
+          }}
+        >
+          Регистрация
+        </div>
+        <div
+          className='autbut'
+          onClick={()=>{
+            setRegOn(false)
+            setAutOn(true);
+          }}
+        >
+          Вход
+        </div>
+        </div>} 
         <Search
           searchTerm={searchTerm}
           handleSearch={handleSearch}
@@ -197,7 +246,7 @@ function App() {
       <div className="allTodoContainer">
         {/* ЗАГОЛОВОК */}
 
-        <div className='headerTodos'>
+        { authorised && <div className='headerTodos'>
           <h2>
             {categoryIcon}
             {categoryName}
@@ -205,20 +254,25 @@ function App() {
           <div className="sort" onClick={sortTodosByDate}>
             <FontAwesomeIcon icon={faArrowDownWideShort}
             /></div>
-        </div>
+        </div>}
 
         {/* ЗАДАЧИ */}
-        <TodoList
+        { authorised && <TodoList
           todos={applyFilters(todos)}
           toggleDone={toggleDone}
           addToFav={addToFav}
           deleteTask={deleteTask}
           editTask={editTask}
-        />
+          selectedCategory={selectedCategory}
+          allTodos={todos}
+          formatDateTime={formatDateTime}
+        />}
         {/* ДОБАВЛЕНИЕ ЗАДАЧ */}
-        <TodoAdd
+        { authorised && <TodoAdd
           addTodo={addTodoHandler}
-        />
+        />}
+        { !authorised && !autOn && <RegForm/>}
+        { !authorised && autOn && !regOn && <AutForm/>}
       </div>
     </div>
   )

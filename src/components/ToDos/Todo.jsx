@@ -6,7 +6,7 @@ import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import styles from './Todo.module.css';
 
-function Todo({ todo, toggleDone, addToFav, deleteTask, editTask }) {
+function Todo({ todo, toggleDone, addToFav, deleteTask, editTask}) {
   const [editing, setEditing] = useState(false);
   const [editedText, setEditedText] = useState(todo.text);
   const [isDeleting, setIsDeleting] = useState(false);

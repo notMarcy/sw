@@ -10,6 +10,10 @@
   font-size: 20px;
   padding: 10px;
 }
+.searchInput:focus{
+  background: rgb(180, 180, 180);
+  
+}
 
 .searchIcon {
   position: absolute;
